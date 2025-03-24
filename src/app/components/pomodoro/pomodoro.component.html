@@ -1,0 +1,10 @@
+<div class="flex justify-center items-center rounded-xl  space-y-6 min-h-screen ">
+    <div>
+        <p class="text-6xl font-mono  text-gray-800 tracking-wider">{{ minutes }}:{{ seconds | number:'2.' }}</p>
+        <mat-progress-bar class="mt-5 mb-5" ProgressBarMode="determinate" [value]="progressValue"></mat-progress-bar>
+        <div class="flex gap-2">
+            <button (click)="startTimer()" class="focus:outline-none bg-gray-800 text-white px-6 py-2 rounded-lg shadow-md hover:bg-white hover:text-gray-900 transition-all">{{isRunning?'Pause':'Start'}}</button>
+            <button (click)="reset()" class="focus:outline-none bg-gray-800 text-white px-6 py-2 rounded-lg shadow-md hover:bg-white hover:text-gray-900 transition-all">Reset</button>
+        </div>
+    </div>
+</div>

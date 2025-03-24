@@ -1,0 +1,38 @@
+
+<div class="flex justify-between shadow-2xl p-2 items-center">
+    <div class="p-2">
+        <p class="text-center text-3xl font-extrabold">Your Tasks</p>
+    </div>
+    <div>
+        <button class="focus:outline-none bg-gray-700 text-white px-6 py-2 rounded-lg shadow-md hover:bg-white hover:text-gray-900 transition-all" (click)="modalService.openModal()" >Add Task</button>
+    </div>
+</div>
+<div>
+<div class="w-full  font-medium text-white-900 bg-transparent  rounded-sm" *ngFor="let task of tasks | paginate: { itemsPerPage: 5, currentPage: p }">
+    <div aria-current="true" type="button" class="w-full px-4 py-2 font-medium text-left rtl:text-right text-white bg-gray-700 border-b border-gray-200 rounded-sm cursor-pointer focus:outline-none flex justify-between transform hover:translate-x-6 transition-all">
+        <div class="flex flex-col">
+            <p class="text-lg font-bold">{{task.title |uppercase}}</p>
+            <p class="text-sm text-gray-200">{{task.description}}</p>
+        </div>
+        <div>
+            <mat-slide-toggle [checked]="task.completed" (change)="updateTask(task)" ></mat-slide-toggle>
+        </div>
+    </div>
+</div>
+<div class="p-2 flex justify-center align-middle">
+    <pagination-controls (pageChange)="p = $event" ></pagination-controls>
+</div>
+
+
+</div>
+
+
+<app-modal>
+    <h3 class="text-lg font-semibold mb-4">Add Task</h3>
+    <input type="text" class="w-full border p-2 mb-3 rounded-md text-black" placeholder="Task Title" [(ngModel)]="taskTitle"/>
+    <textarea class="w-full border p-2 mb-3 rounded-md text-black" placeholder="Task Description" [(ngModel)]="taskDescription"></textarea>
+    <div class="flex justify-end">
+      <button class="bg-transparent text-white px-4 py-2 rounded-md mr-2" (click)="submitTask()">Save Task</button>
+    </div>
+</app-modal>
+    
