@@ -11,6 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Create environment.ts
+        run: |
+          mkdir -p src/environments
+          echo "export const environment = {" > src/environments/environment.ts
+          echo "  production: false," >> src/environments/environment.ts
+          echo "  firebaseConfig: {" >> src/environments/environment.ts
+          echo "    apiKey: '${{ secrets.API_KEY }}'," >> src/environments/environment.ts
+          echo "    authDomain: '${{ secrets.AUTH_DOMAIN }}'," >> src/environments/environment.ts
+          echo "    databaseURL: '${{ secrets.DATABASE_URL }}'," >> src/environments/environment.ts
+          echo "    projectId: '${{ secrets.PROJECT_ID }}'," >> src/environments/environment.ts
+          echo "    storageBucket: '${{ secrets.STORAGE_BUCKET }}'," >> src/environments/environment.ts
+          echo "    messagingSenderId: '${{ secrets.MESSAGING_SENDER_ID }}'," >> src/environments/environment.ts
+          echo "    appId: '${{ secrets.APP_ID }}'," >> src/environments/environment.ts
+          echo "    measurementId: '${{ secrets.MEASUREMENT_ID }}'" >> src/environments/environment.ts
+          echo "  }" >> src/environments/environment.ts
+          echo "};" >> src/environments/environment.ts
+          cat src/environments/environment.ts # Debugging output
       - name: Create environment.prod.ts
         run: |
           mkdir -p src/environments
