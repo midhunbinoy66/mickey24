@@ -35,7 +35,10 @@ export class TasksComponent implements OnInit{
 
   ngOnInit(): void {
     this.tasks$ = this.taskService.getTasks()
-    this.tasks$.subscribe(data=>this.tasks=data)
+    this.tasks$.subscribe(data=>{
+      const sortedData = data.sort((a,b)=>b.createdAt-a.createdAt);
+      this.tasks=sortedData
+    })
 
   }
 
@@ -43,9 +46,10 @@ export class TasksComponent implements OnInit{
     if(!this.taskTitle.trim()) return ;
     const task: Task = { title: this.taskTitle, description: this.taskDescription, createdAt: Date.now(),completed:false };
     this.taskService.addTask(task).then(()=>{
+      this.modalService.closeModal();
       this.taskTitle='';
       this.taskDescription=''
-      this.modalService.closeModal();
+      this.matSnack.open(`Task added successfully`,'Close',{duration:3000})
     })
   }
 

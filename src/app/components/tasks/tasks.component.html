@@ -28,11 +28,11 @@
 
 
 <app-modal>
-    <h3 class="text-lg font-semibold mb-4">Add Task</h3>
+    <h3 class="text-lg font-semibold mb-4 text-gray-700">Add Task</h3>
     <input type="text" class="w-full border p-2 mb-3 rounded-md text-black" placeholder="Task Title" [(ngModel)]="taskTitle"/>
     <textarea class="w-full border p-2 mb-3 rounded-md text-black" placeholder="Task Description" [(ngModel)]="taskDescription"></textarea>
     <div class="flex justify-end">
-      <button class="bg-transparent text-white px-4 py-2 rounded-md mr-2" (click)="submitTask()">Save Task</button>
+      <button class="bg-transparent text-gray-900 px-4 py-2 rounded-md mr-2" (click)="submitTask()">Save Task</button>
     </div>
 </app-modal>
     

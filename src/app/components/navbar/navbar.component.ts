@@ -31,7 +31,9 @@ export class NavbarComponent {
         title: "Confirm Logout",
         message: "Are you sure you want to log out?",
         actionText: "Logout",
-        onConfirm: () => this.authService.logout()
+        onConfirm: () => this.authService.logout().then(()=>{
+          this.router.navigate(['/login'])
+        })
       }
     })
   }

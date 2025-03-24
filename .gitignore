@@ -46,4 +46,6 @@ Thumbs.db
 *-debug.log
 .runtimeconfig.json
 
-src/environment.env
+# Ignore all environment files
+src/environments/*.ts
+
