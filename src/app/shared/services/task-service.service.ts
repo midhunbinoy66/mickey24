@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import { Observable, Subject } from 'rxjs';
 
@@ -19,15 +20,28 @@ export class TaskServiceService {
 
 
   constructor(
-    private fireStore:Firestore
+    private fireStore:Firestore,
+    private auth:Auth
   ) { }
 
   getTasks():Observable<Task[]>{
-    return collectionData(this.taskCollection,{idField:'id'}) as Observable<Task[]>
+    const user = this.auth.currentUser;
+    if(!user) return new Observable<Task[]>()
+
+    const taskCollection = collection(this.fireStore, `users/${user.uid}/tasks`);
+    return collectionData(taskCollection, { idField: 'id' }) as Observable<Task[]>
+    // return collectionData(this.taskCollection,{idField:'id'}) as Observable<Task[]>
   }
 
   addTask(task: Task) {
-    return addDoc(this.taskCollection, task);
+
+    const user = this.auth.currentUser;
+    if(!user) return Promise.reject();
+
+    const taskCollection = collection(this.fireStore,`users/${user.uid}/tasks`)
+    return addDoc(taskCollection, task);
+
+    // return addDoc(this.taskCollection, task);
   }
 
   deleteTask(taskId: string) {
@@ -36,7 +50,10 @@ export class TaskServiceService {
   }
 
   updateTask(taskId:string,completed:boolean){
-    const taskDoc = doc(this.fireStore,`tasks/${taskId}`);
-    return updateDoc(taskDoc,{completed});
+    const user = this.auth.currentUser;
+    if (!user) return Promise.reject();
+
+    const taskDoc = doc(this.fireStore, `users/${user.uid}/tasks/${taskId}`);
+    return  updateDoc(taskDoc, { completed })
   }
 }

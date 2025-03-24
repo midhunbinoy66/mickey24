@@ -61,7 +61,7 @@
               "buildTarget": "mickey24:build:production"
             },
             "development": {
-              "buildTarget": "mickey24:build:development"
+              "buildTarget": "mickey24:build:development"              
             }
           },
           "defaultConfiguration": "development"

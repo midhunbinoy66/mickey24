@@ -8,7 +8,7 @@ import { routes } from './app.routes';
 import { provideAuth } from '@angular/fire/auth';
 import { getAuth } from '@firebase/auth';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { environment } from '../envrionments/environment';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [

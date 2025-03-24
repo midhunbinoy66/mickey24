@@ -6,7 +6,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 body {
-    background-image: url('assets/bg-pirmary.png'); /* Adjust the path */
+    background-image: url('assets/bg-primary.webp'); /* Adjust the path */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
